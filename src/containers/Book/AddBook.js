@@ -10,8 +10,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 import "../main.css"
 
-
-// Welcome Home Component.
 export default function AddBook(props) {
     debugger
     const dispatch = useDispatch()

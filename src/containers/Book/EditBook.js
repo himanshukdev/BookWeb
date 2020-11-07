@@ -19,9 +19,7 @@ export default function EditBook(props) {
         name:false,
         isbn:false
       });
-    // const [error,setError] = ({
-    //     FormError:""
-    // });
+    const [error,setError] = useState("");
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -37,7 +35,7 @@ export default function EditBook(props) {
               break;
           case "isbn":
             if(!value){
-                error= "Please enter book name."
+                error= "Please enter isbn."
             }
             break;
           default:
@@ -51,7 +49,7 @@ export default function EditBook(props) {
         const error = validateField(name, value);
         setState({...state,[name]:value});
         setTouched({ ...touched, [name]: true });
-        // setError({ FormError: error });
+        setError(error);
     }
 
     const handleCancel = () => {
@@ -83,7 +81,7 @@ export default function EditBook(props) {
             touched[item] = true;
           });
           setTouched(formTouchedState);
-        //   setError({ FormError: errs.FormError });
+          setError(errs.FormError);
         }
     }
       
@@ -101,9 +99,9 @@ export default function EditBook(props) {
         <Button className="cursor-pointer" variant="contained" color="secondary" onClick={handleCancel} >Cancel</Button >
         </div>
         
-        {/* {error &&(
-            <div className="validation-summary">{error.FormError}</div>
-        )} */}
+        {error &&(
+            <div className="validation-summary">{error}</div>
+        )}
       </>
   
   );

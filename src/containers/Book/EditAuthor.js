@@ -20,9 +20,7 @@ export default function EditAuthor(props) {
         firstName:false,
         lastName:false
       });
-    // const [error,setError] = ({
-    //     FormError:""
-    // });
+    const [error,setError] = useState("");
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -52,7 +50,7 @@ export default function EditAuthor(props) {
         const error = validateField(name, value);
         setState({...state,[name]:value});
         setTouched({ ...touched, [name]: true });
-        // setError({ FormError: error });
+        setError(error);
     }
 
     const handleCancel = () => {
@@ -84,7 +82,7 @@ export default function EditAuthor(props) {
             touched[item] = true;
           });
           setTouched(formTouchedState);
-        //   setError({ FormError: errs.FormError });
+          setError(errs.FormError);
         }
     }
       
@@ -102,9 +100,9 @@ export default function EditAuthor(props) {
         <Button className="cursor-pointer" variant="contained" color="secondary" onClick={handleCancel} >Cancel</Button >
         </div>
         
-        {/* {error &&(
-            <div className="validation-summary">{error.FormError}</div>
-        )} */}
+        {error &&(
+            <div className="validation-summary">{error}</div>
+        )}
       </>
   
   );

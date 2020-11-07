@@ -8,7 +8,10 @@ import {
     SET_BOOK_DETAIL_DATA,
     SET_BOOK_CREATED_STATUS,
     SET_AUTHOR_CREATED_STATUS,
-    SET_AUTHOR_LISTING_DATA
+    SET_AUTHOR_LISTING_DATA,
+    SET_AUTHOR_UPDATED_STATUS,
+    SET_BOOK_UPDATED_STATUS
+
   } from "../../constants/ActionTypes";
 
 
@@ -119,6 +122,39 @@ export const createAuthor = (formData) => dispatch => {
       });
   };
 
+export const updateAuthorById = (authorId,formData) => dispatch => {
+    dispatch(startFetching());
+    const url = `api/author/${authorId}`;
+    axios
+      .put(url,formData)
+      .then(({ data }) => {
+        if (data.status === 200) {
+          dispatch({ type: SET_AUTHOR_UPDATED_STATUS, payload: RESPONSE_STATUS.SUCCESS});
+          dispatch(fetchSuccessful());
+        }
+      })
+      .catch(error => {
+        dispatch(fetchError());
+        console.log(error);
+      });
+  };
 
+export const updateBookById = (bookId,formData) => dispatch => {
+    debugger
+    dispatch(startFetching());
+    const url = `api/book/${bookId}`;
+    axios
+      .put(url,formData)
+      .then(({ data }) => {
+        if (data.status === 200) {
+          dispatch({ type: SET_BOOK_UPDATED_STATUS, payload: RESPONSE_STATUS.SUCCESS});
+          dispatch(fetchSuccessful());
+        }
+      })
+      .catch(error => {
+        dispatch(fetchError());
+        console.log(error);
+      });
+  };
 
 

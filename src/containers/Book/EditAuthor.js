@@ -2,22 +2,23 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import TextField from '@material-ui/core/TextField';
-import {updateBookById} from "../../store/actions/App";
+import {updateAuthorById} from "../../store/actions/App";
 import Button from '@material-ui/core/Button';
 
 import "../main.css"
 
 
 // Welcome Home Component.
-export default function EditBook(props) {
-    const {name,isbn,bookId,closeHandler} = props;
+export default function EditAuthor(props) {
+    debugger
+    const {firstName,lastName,authorId,closeHandler} = props;
     const [state,setState] = useState({
-        name:name || "",
-        isbn:isbn || "",
+        firstName:firstName || "",
+        lastName:lastName || "",
     });
     const [touched, setTouched] = useState({
-        name:false,
-        isbn:false
+        firstName:false,
+        lastName:false
       });
     // const [error,setError] = ({
     //     FormError:""
@@ -30,14 +31,14 @@ export default function EditBook(props) {
     const validateField = (name, value) => {
         let error = "";
         switch (name) {
-          case "name":
+          case "firstName":
               if(!value){
-                  error="Please enter book name."
+                  error="Please enter first Name."
               }
               break;
-          case "isbn":
+          case "lastName":
             if(!value){
-                error= "Please enter book name."
+                error= "Please enter last Name."
             }
             break;
           default:
@@ -76,7 +77,7 @@ export default function EditBook(props) {
         const { isFormValid, errs } = validateForm();
 
         if (isFormValid) {
-          dispatch(updateBookById(bookId,state))
+          dispatch(updateAuthorById(authorId,state))
         } else {
           const formTouchedState = { ...touched };
           Object.keys(touched).forEach(item => {
@@ -89,12 +90,12 @@ export default function EditBook(props) {
       
   return (
       <>
-        <div className="book-detail-header">Update Book</div>
+        <div className="book-detail-header">Update Author</div>
         <div className="text-field-wrapper m-right-5">
-            <TextField id="bookname" label="Name" name="name" value={state.name} onChange={inputChangeHandler} />
+            <TextField id="firstname" label="First Name" name="firstName" value={state.firstName} onChange={inputChangeHandler} />
         </div>
         <div className="text-field-wrapper">
-            <TextField id="bookisbn" label="ISBN" name="isbn" value={state.isbn} onChange={inputChangeHandler}/>
+            <TextField id="lastname" label="Last Name" name="lastName" value={state.lastName} onChange={inputChangeHandler}/>
         </div>
         <div className="edit-action-button-wrapper">
         <Button className="cursor-pointer m-right-5" variant="contained" color="secondary" onClick={handleSubmit} >Update</Button >

@@ -37,8 +37,13 @@
 .text-field-wrapper{
     text-align: center;
 }
-
-
+.addaccount-option {
+    color: #f51aac !important;
+  }
+  
+.cursor-pointer{
+    cursor: pointer;
+}
 .edit-action-button-wrapper{
     text-align: center;
     margin-top: 10px;

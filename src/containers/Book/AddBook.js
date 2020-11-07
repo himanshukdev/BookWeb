@@ -161,15 +161,15 @@ export default function AddBook(props) {
                             {`${author.firstName} ${author.lastName}`}
                             </option>
                         ))}
-                        <option className="addaccount-option" value="AddNewAuthor">
+                        <option className="addaccount-option cursor-pointer" value="AddNewAuthor">
                                 Add New Author
                                 </option>
                     </Select>
             </FormControl>
         </div>
         <div className="edit-action-button-wrapper">
-            <Button className="m-right-5" variant="contained" color="secondary" onClick={handleSubmit} >Save</Button >
-            <Button className="" variant="contained" color="secondary" onClick={handleCancel} >Cancel</Button >
+            <Button className="cursor-pointer m-right-5" variant="contained" color="secondary" onClick={handleSubmit} >Save</Button >
+            <Button className="cursor-pointer" variant="contained" color="secondary" onClick={handleCancel} >Cancel</Button >
         </div>
         
         {error &&(
@@ -186,8 +186,8 @@ export default function AddBook(props) {
                 <TextField id="lastName" label="Last Name" name="lastName" value={authorState.lastName} onChange={inputChangeHandler}/>
             </div>
             <div className="edit-action-button-wrapper">
-                <Button className="m-right-5" variant="contained" color="secondary" onClick={handleSubmit} >Save</Button >
-                <Button className="" variant="contained" color="secondary" onClick={()=>setWantToAddAuthor(false)} >Cancel</Button >
+                <Button className="cursor-pointer m-right-5" variant="contained" color="secondary" onClick={handleSubmit} >Save</Button >
+                <Button className="cursor-pointer" variant="contained" color="secondary" onClick={()=>setWantToAddAuthor(false)} >Cancel</Button >
              </div>
             </>
         )}

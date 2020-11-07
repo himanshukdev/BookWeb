@@ -6,7 +6,9 @@ import {
     SET_BOOK_DETAIL_DATA,
     SET_AUTHOR_LISTING_DATA,
     SET_BOOK_CREATED_STATUS,
-    SET_AUTHOR_CREATED_STATUS
+    SET_AUTHOR_CREATED_STATUS,
+    SET_AUTHOR_UPDATED_STATUS,
+    SET_BOOK_UPDATED_STATUS
   } from "../../constants/ActionTypes";
 
   import {RESPONSE_STATUS} from "../../constants/AppVariable";
@@ -18,6 +20,8 @@ import {
    authorListingData:[],
    authorCreatedStatus:RESPONSE_STATUS.INITSTATE,
    bookCreatedStatus: RESPONSE_STATUS.INITSTATE,
+   authorUpdatedStatus:RESPONSE_STATUS.INITSTATE,
+   bookUpdatedStatus: RESPONSE_STATUS.INITSTATE
   };
   
   const app = (state = initState, action) => {
@@ -68,6 +72,16 @@ import {
         return{
             ...state,
             authorCreatedStatus:action.payload
+        }
+      case SET_AUTHOR_UPDATED_STATUS:
+        return{
+            ...state,
+            authorUpdatedStatus:action.payload
+        }
+      case SET_BOOK_UPDATED_STATUS:
+        return{
+            ...state,
+            bookUpdatedStatus:action.payload
         }
       default:
         return state;

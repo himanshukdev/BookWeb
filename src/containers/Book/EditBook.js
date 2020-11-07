@@ -4,16 +4,22 @@ import { useSelector, useDispatch } from "react-redux";
 import TextField from '@material-ui/core/TextField';
 import {updateBookById} from "../../store/actions/App";
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+
 
 import "../main.css"
 
 
 // Welcome Home Component.
 export default function EditBook(props) {
-    const {name,isbn,bookId,closeHandler} = props;
+    const DEFAULT_SELECT_VALUE = "NONE";
+    const {name,isbn,bookId,authorId,closeHandler} = props;
     const [state,setState] = useState({
         name:name || "",
         isbn:isbn || "",
+        author:authorId||""
     });
     const [touched, setTouched] = useState({
         name:false,
@@ -21,7 +27,7 @@ export default function EditBook(props) {
       });
     const [error,setError] = useState("");
     const dispatch = useDispatch()
-
+    const authorListData = useSelector(state=>state.app.authorListingData);
     useEffect(() => {
     }, []);
 
@@ -93,6 +99,28 @@ export default function EditBook(props) {
         </div>
         <div className="text-field-wrapper">
             <TextField id="bookisbn" label="ISBN" name="isbn" value={state.isbn} onChange={inputChangeHandler}/>
+        </div>
+        <div className="text-field-wrapper m-top-5">
+                <FormControl style={{minWidth: 190}}>
+                    <InputLabel id="book-select-label">Author</InputLabel>
+                    <Select
+                    labelId="book-select-label"
+                    labelWidth={10}
+                    id="bookauthor"
+                    name="author"
+                    value={state.author}
+                    onChange={inputChangeHandler}
+                    >
+                    <option value={DEFAULT_SELECT_VALUE} disabled>
+                            Author
+                        </option>
+                        {authorListData.map(author => (
+                            <option key={author.firstName} value={author._id}>
+                            {`${author.firstName} ${author.lastName}`}
+                            </option>
+                        ))}
+                    </Select>
+            </FormControl>
         </div>
         <div className="edit-action-button-wrapper">
         <Button className="cursor-pointer m-right-5" variant="contained" color="secondary" onClick={handleSubmit} >Update</Button >

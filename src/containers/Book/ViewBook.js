@@ -80,6 +80,7 @@ const [wantToEditAuthor,setWantToEditAuthor] = useState(false);
                                 name={bookdetailData.name}
                                 isbn={bookdetailData.isbn}
                                 bookId={bookId}
+                                authorId={bookdetailData.author._id}
                                 closeHandler={()=>setWantToEditBook(false)}
                             />
                         )}

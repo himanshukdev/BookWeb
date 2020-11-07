@@ -141,7 +141,7 @@ const EnhancedTableToolbar = (props) => {
     >
     {numSelected ? (
         <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-            {nameSelected} selected
+            The Book {nameSelected} has been selected.
         </Typography>
         ) : (
         <Typography className={classes.title} variant="h6" id="tableTitle" component="div">

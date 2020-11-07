@@ -14,7 +14,6 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => response,
   error => {
-    debugger
     // flag -- the code below should have dynamic baseURL as per qa/prod server selected.
     // Working only with qa server as of now.
     if (error.response) {

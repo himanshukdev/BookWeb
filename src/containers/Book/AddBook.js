@@ -11,7 +11,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import "../main.css"
 
 export default function AddBook(props) {
-    debugger
     const dispatch = useDispatch()
     const DEFAULT_SELECT_VALUE = "NONE";
     const {closeHandler} = props;

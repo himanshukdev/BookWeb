@@ -124,7 +124,6 @@ const useToolbarStyles = makeStyles((theme) => ({
 }));
 
 const EnhancedTableToolbar = (props) => {
-  debugger
   const classes = useToolbarStyles();
   const { numSelected,nameSelected } = props;
   const [wantViewBook, setWantViewBook] = React.useState(false);
@@ -213,7 +212,6 @@ export default function EnhancedTable() {
   };
 
   const handleClick = (event, id,name) => {
-    debugger
     if(selected === id ){
       setSelected(null);
     }else{

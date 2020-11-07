@@ -19,7 +19,6 @@ const[wantToEditBook,setWantToEditBook] = useState(false)
 const[wantToAddBook,setWantToAddBook] = useState(false)
 const [wantToEditAuthor,setWantToEditAuthor] = useState(false);
     useEffect(() => {
-        debugger
         dispatch(getBookDetails(bookId));
       }, [bookId]);
 

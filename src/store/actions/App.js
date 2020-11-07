@@ -33,7 +33,6 @@ export const fetchError = payload => ({
 
 // get all books present in database.
 export const getBookList = () => dispatch => {
-    debugger
     dispatch(startFetching());
     const url = `api/book`;
     axios
@@ -50,8 +49,24 @@ export const getBookList = () => dispatch => {
       });
   };
 
+  export const getSeachedBookList = (searchParam) => dispatch => {
+    dispatch(startFetching());
+    const url = `api/book/search`;
+    axios
+      .post(url,{searchParam:searchParam})
+      .then(({ data }) => {
+        if (data.status === 200) {
+          dispatch({ type: SET_BOOK_LISTING_DATA, payload: data.data });
+          dispatch(fetchSuccessful());
+        }
+      })
+      .catch(error => {
+        dispatch(fetchError());
+        console.log(error);
+      });
+  };
+
 export const getBookDetails = (bookId) => dispatch => {
-    debugger
     dispatch(startFetching());
     const url = `api/book/${bookId}`;
     axios
@@ -69,13 +84,11 @@ export const getBookDetails = (bookId) => dispatch => {
   };
 
 export const getAuthorList = () => dispatch => {
-    debugger
       dispatch(startFetching());
       const url = `api/author`;
       axios
         .get(url)
         .then(({ data }) => {
-          debugger
           if (data.status === 200) {
             dispatch({ type: SET_AUTHOR_LISTING_DATA, payload: data.data });
             dispatch(fetchSuccessful());
@@ -140,7 +153,6 @@ export const updateAuthorById = (authorId,formData) => dispatch => {
   };
 
 export const updateBookById = (bookId,formData) => dispatch => {
-    debugger
     dispatch(startFetching());
     const url = `api/book/${bookId}`;
     axios

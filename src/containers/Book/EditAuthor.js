@@ -10,7 +10,6 @@ import "../main.css"
 
 // Welcome Home Component.
 export default function EditAuthor(props) {
-    debugger
     const {firstName,lastName,authorId,closeHandler} = props;
     const [state,setState] = useState({
         firstName:firstName || "",

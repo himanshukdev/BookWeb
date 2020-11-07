@@ -23,9 +23,45 @@
     clear: right;
   }
 
+.detail-action-button{
+    text-align: right;
+    margin-right: 50px;
+    position: relative;
+    top: -20px;
+}
+
+.m-right-5{
+    margin-right:5px !important;
+}
+
+.text-field-wrapper{
+    text-align: center;
+}
 
 
+.edit-action-button-wrapper{
+    text-align: center;
+    margin-top: 10px;
+    position: relative;
+}
 
+.book-detail-header{
+    text-align: center;
+    top:10px;
+    padding: 20px 30px 20px 30px;
+    font-size: 15px;
+    letter-spacing: 1.23;
+    font-weight: 700;
+    color: #333;
+}
+.validation-summary {
+    color: red;
+    margin-top: 15px;
+    font-size: 15px;
+    font-family: Roboto;
+    line-height: 1.2;
+    text-align: center;
+  }
 
 
 

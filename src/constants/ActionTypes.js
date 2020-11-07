@@ -6,3 +6,6 @@ export const FETCH_ERROR = "fetch_error";
 // App
 export const SET_BOOK_LISTING_DATA =    "set_book_listing_data";
 export const SET_BOOK_DETAIL_DATA =     "set_book_detail_data";
+export const SET_AUTHOR_LISTING_DATA =   "set_author_listing_data";
+export const SET_AUTHOR_CREATED_STATUS = "set_author_ceated_status";
+export const SET_BOOK_CREATED_STATUS =  "set_book_ceated_status";

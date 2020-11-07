@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Button from '@material-ui/core/Button';
 import {getBookDetails} from "../../store/actions/App";
+import AddBook from "../Book/AddBook";
 import "../main.css"
 
 
@@ -12,7 +13,9 @@ const dispatch = useDispatch()
 const {bookId} = props;
 
 const bookdetailData = useSelector(state=>state.app.bookDetailData);
-
+const[wantToEditBook,setWantToEditBook] = useState(false)
+const[wantToAddBook,setWantToAddBook] = useState(false)
+const [wantToEditAuthor,setWantToEditAuthor] = useState(false);
     useEffect(() => {
         debugger
         dispatch(getBookDetails(bookId));
@@ -23,11 +26,28 @@ const bookdetailData = useSelector(state=>state.app.bookDetailData);
   return (
         <>
             <div className="header-section">Book Details</div>
-                
+            <div className="detail-action-button">
+                    <Button 
+                        className="m-right-5"
+                        variant="contained"
+                        color="secondary" 
+                        onClick={()=>{setWantToAddBook(true);setWantToEditBook(false);setWantToEditAuthor(false)}} >Add Book</Button >
+                    <Button 
+                        className="m-right-5"
+                        variant="contained" 
+                        color="secondary" 
+                        onClick={()=>{setWantToEditBook(true);setWantToEditAuthor(false);setWantToAddBook(false)}} >Edit Book</Button >
+                    <Button 
+                        variant="contained" 
+                        color="secondary" 
+                        onClick={()=>{setWantToEditAuthor(true);setWantToEditBook(false);setWantToAddBook(false)}} >Edit Author</Button >
+                </div>
                 {bookdetailData && Object.keys(bookdetailData).length !== 0 &&  (
                     <>
                     <div className="book-detail-container">
                         
+                            <>
+                            {!wantToEditBook && !wantToAddBook && !wantToEditAuthor &&(
                             <>
                                 <div className="book-detail-row">
                                     <span className="">Name</span>
@@ -45,6 +65,13 @@ const bookdetailData = useSelector(state=>state.app.bookDetailData);
                                     <span className="">Author Last Name</span> 
                                     <span className="span-stack">{bookdetailData.author.lastName}</span>
                                 </div>
+                            </>
+                        )}
+                        {wantToAddBook && (
+                            <AddBook 
+                                closeHandler={()=>setWantToAddBook(false)}
+                            />
+                        )}
                             </>
                     </div>
                     </>

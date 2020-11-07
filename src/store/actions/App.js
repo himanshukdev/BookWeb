@@ -5,8 +5,14 @@ import {
     FETCH_END,
     FETCH_ERROR,
     SET_BOOK_LISTING_DATA,
-    SET_BOOK_DETAIL_DATA
+    SET_BOOK_DETAIL_DATA,
+    SET_BOOK_CREATED_STATUS,
+    SET_AUTHOR_CREATED_STATUS,
+    SET_AUTHOR_LISTING_DATA
   } from "../../constants/ActionTypes";
+
+
+import {RESPONSE_STATUS} from "../../constants/AppVariable";
 
 export const startFetching = () => ({
   type: FETCH_START
@@ -59,8 +65,59 @@ export const getBookDetails = (bookId) => dispatch => {
       });
   };
 
- 
+export const getAuthorList = () => dispatch => {
+    debugger
+      dispatch(startFetching());
+      const url = `api/author`;
+      axios
+        .get(url)
+        .then(({ data }) => {
+          debugger
+          if (data.status === 200) {
+            dispatch({ type: SET_AUTHOR_LISTING_DATA, payload: data.data });
+            dispatch(fetchSuccessful());
+          }
+        })
+        .catch(error => {
+          dispatch(fetchError());
+          console.log(error);
+        });
+    };
 
+export const createBook = (formData) => dispatch => {
+    dispatch(startFetching());
+    const url = `api/book/`;
+    axios
+      .post(url,formData)
+      .then(({ data }) => {
+        if (data.status === 200) {
+          dispatch({ type: SET_BOOK_CREATED_STATUS, payload: RESPONSE_STATUS.SUCCESS});
+          dispatch(fetchSuccessful());
+        }
+      })
+      .catch(error => {
+        dispatch(fetchError());
+        console.log(error);
+      });
+  };
+
+ 
+export const createAuthor = (formData) => dispatch => {
+    dispatch(startFetching());
+    const url = `api/author/`;
+    axios
+      .post(url,formData)
+      .then(({ data }) => {
+        if (data.status === 200) {
+          dispatch({ type: SET_AUTHOR_CREATED_STATUS, payload: RESPONSE_STATUS.SUCCESS});
+          dispatch(fetchSuccessful());
+        }
+      })
+      .catch(error => {
+        dispatch(fetchError());
+        console.log(error);
+      });
+  };
 
 
 

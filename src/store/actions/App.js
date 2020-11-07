@@ -4,7 +4,8 @@ import {
     FETCH_START,
     FETCH_END,
     FETCH_ERROR,
-    SET_BOOK_LISTING_DATA
+    SET_BOOK_LISTING_DATA,
+    SET_BOOK_DETAIL_DATA
   } from "../../constants/ActionTypes";
 
 export const startFetching = () => ({
@@ -31,6 +32,24 @@ export const getBookList = () => dispatch => {
       .then(({ data }) => {
         if (data.status === 200) {
           dispatch({ type: SET_BOOK_LISTING_DATA, payload: data.data });
+          dispatch(fetchSuccessful());
+        }
+      })
+      .catch(error => {
+        dispatch(fetchError());
+        console.log(error);
+      });
+  };
+
+export const getBookDetails = (bookId) => dispatch => {
+    debugger
+    dispatch(startFetching());
+    const url = `api/book/${bookId}`;
+    axios
+      .get(url)
+      .then(({ data }) => {
+        if (data.status === 200) {
+          dispatch({ type: SET_BOOK_DETAIL_DATA, payload: data.data });
           dispatch(fetchSuccessful());
         }
       })

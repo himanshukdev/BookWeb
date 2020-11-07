@@ -2,7 +2,8 @@ import {
     FETCH_START,
     FETCH_END,
     FETCH_ERROR,
-    SET_BOOK_LISTING_DATA
+    SET_BOOK_LISTING_DATA,
+    SET_BOOK_DETAIL_DATA
   } from "../../constants/ActionTypes";
 
   let initState = {
@@ -39,6 +40,11 @@ import {
           bookListingData:action.payload
         };
       }
+      case SET_BOOK_DETAIL_DATA:
+        return{
+            ...state,
+            bookDetailData:action.payload
+        }
       default:
         return state;
     }

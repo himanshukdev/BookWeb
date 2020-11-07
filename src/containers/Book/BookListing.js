@@ -17,6 +17,10 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Visibility from "@material-ui/icons/Visibility"; 
+import Tooltip from '@material-ui/core/Tooltip';
+import IconButton from '@material-ui/core/IconButton';
+import ViewBook from "./ViewBook"
 
 
 
@@ -123,24 +127,40 @@ const EnhancedTableToolbar = (props) => {
   debugger
   const classes = useToolbarStyles();
   const { numSelected,nameSelected } = props;
-
+  const [wantViewBook, setWantViewBook] = React.useState(false);
 
   return (
     <>
+     {wantViewBook && (
+      <ViewBook bookId={numSelected}/>
+    )}
     <Toolbar
       className={clsx(classes.root, {
         [classes.highlight]: numSelected,
       })}
     >
-      {numSelected ? (
+    {numSelected ? (
         <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-          {nameSelected} selected
+            {nameSelected} selected
         </Typography>
-      ) : (
+        ) : (
         <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          
+            
         </Typography>
-      )}
+    )}
+
+    {numSelected ? (
+            <>
+            <Tooltip title="view">
+                <IconButton aria-label="view" onClick={() => setWantViewBook(!wantViewBook)}>
+                <Visibility />
+                </IconButton>
+            </Tooltip>
+            </>
+    
+        ) : (
+            <></>
+    )}
      
     </Toolbar>
     </>

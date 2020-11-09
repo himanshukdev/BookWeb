@@ -130,9 +130,9 @@ const EnhancedTableToolbar = (props) => {
 
   return (
     <>
-     {wantViewBook && (
+    
       <ViewBook bookId={numSelected}/>
-    )}
+   
     <Toolbar
       className={clsx(classes.root, {
         [classes.highlight]: numSelected,

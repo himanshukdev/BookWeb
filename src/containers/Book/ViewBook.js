@@ -29,41 +29,50 @@ const {bookId} = props;
 const bookdetailData = useSelector(state=>state.app.bookDetailData);
 const[wantToEditBook,setWantToEditBook] = useState(false)
 const[wantToAddBook,setWantToAddBook] = useState(false)
-const [wantToEditAuthor,setWantToEditAuthor] = useState(false);
+const[wantToEditAuthor,setWantToEditAuthor] = useState(false);
+const[wantToAddAuthor,setWantToAddAuthor] = useState(false);
+const[dataFetchedForBookEdit,setDataFetchedForBookEdit] = useState(bookdetailData)
 
 const bookCreatedStatus = useSelector(state=>state.app.bookCreatedStatus)
-const authorCreatedStatus = useSelector(state=>state.app.bookCreatedStatus)
+const authorCreatedStatus = useSelector(state=>state.app.authorCreatedStatus)
 const bookUpdatedStatus = useSelector(state=>state.app.bookUpdatedStatus)
 const authorUpdatedStatus = useSelector(state=>state.app.authorUpdatedStatus)
     useEffect(() => {
         dispatch(getBookDetails(bookId));
       }, [bookId]);
 
+    useEffect(() => {
+    if(bookdetailData){
+        setDataFetchedForBookEdit(bookdetailData);
+    }
+    }, [bookdetailData]);
+    
+
       useEffect(() => {
         if(bookCreatedStatus === "success"){
           dispatch(resetBookCreationStatus());
           dispatch(getBookList());
-          toast("Book was added successfuly!")
+          toast("Book was added successfully!")
           setWantToAddBook(false);
         }
         if(authorCreatedStatus === "success"){
           dispatch(resetAuthorCreationStatus());
           dispatch(getAuthorList());
-          toast("Author was added successfuly!")
+          toast("Author was added successfully!")
           setWantToAddBook(false);
         }
         if(bookUpdatedStatus === "success"){
           dispatch(resetBookUpdatedStatus());
           dispatch(getBookList());
           dispatch(getBookDetails(bookId));
-          toast("Book was updated successfuly!")
+          toast("Book was updated successfully!")
           setWantToEditBook(false);
         }
         if(authorUpdatedStatus === "success"){
           dispatch(resetAuthorUpdatedStatus());
           dispatch(getAuthorList());
           dispatch(getBookDetails(bookId));
-          toast("Author was Updated successfuly!")
+          toast("Author was Updated successfully!")
           setWantToEditAuthor(false);
         }
       }, [bookCreatedStatus,authorCreatedStatus,bookUpdatedStatus,authorUpdatedStatus]);
@@ -78,45 +87,65 @@ const authorUpdatedStatus = useSelector(state=>state.app.authorUpdatedStatus)
                         variant="contained"
                         color="secondary" 
                         onClick={()=>{setWantToAddBook(true);setWantToEditBook(false);setWantToEditAuthor(false)}} >Add Book</Button >
-                    <Button 
+                    {!bookId &&(
+                        <Button 
                         className="m-right-5 cursor-pointer"
                         variant="contained" 
                         color="secondary" 
-                        onClick={()=>{setWantToEditBook(true);setWantToEditAuthor(false);setWantToAddBook(false)}} >Edit Book</Button >
-                    <Button 
-                        className="cursor-pointer"
-                        variant="contained" 
-                        color="secondary" 
-                        onClick={()=>{setWantToEditAuthor(true);setWantToEditBook(false);setWantToAddBook(false)}} >Edit Author</Button >
+                        onClick={()=>{setWantToAddAuthor(true); setWantToEditBook(false);setWantToEditAuthor(false);setWantToAddBook(false)}} >Add Author</Button >
+                    )}
+                    {bookId && (
+                        <Button 
+                    className="m-right-5 cursor-pointer"
+                    variant="contained" 
+                    color="secondary" 
+                    onClick={()=>{setWantToEditBook(true);setWantToEditAuthor(false);setWantToAddBook(false)}} >Edit Book</Button >
+                    )}
+                    
+                    {bookId && (
+                        <Button 
+                    className="cursor-pointer"
+                    variant="contained" 
+                    color="secondary" 
+                    onClick={()=>{setWantToEditAuthor(true);setWantToEditBook(false);setWantToAddBook(false)}} >Edit Author</Button >
+                    )}
+                    
                 </div>
-                {bookdetailData && Object.keys(bookdetailData).length !== 0 &&  (
+                {/* {bookdetailData && Object.keys(bookdetailData).length !== 0 &&  ( */}
                     <>
                     <div className="book-detail-container">
                         
                             <>
-                            {!wantToEditBook && !wantToAddBook && !wantToEditAuthor &&(
-                            <>
-                                <div className="book-detail-row">
-                                    <span className="">Name</span>
-                                    <span className="span-stack">{bookdetailData.name}</span>
-                                </div>
-                                <div>
-                                    <span className="">Isbn</span>
-                                    <span className="span-stack">{bookdetailData.isbn}</span>
-                                </div>
-                                <div>
-                                    <span className="">Author First Name</span>
-                                    <span className="span-stack">{bookdetailData.author.firstName}</span>
-                                </div>
-                                <div>
-                                    <span className="">Author Last Name</span> 
-                                    <span className="span-stack">{bookdetailData.author.lastName}</span>
-                                </div>
-                            </>
-                        )}
+                            {dataFetchedForBookEdit && Object.keys(dataFetchedForBookEdit).length !== 0 &&  (
+                                <>
+                                    {!wantToEditBook && !wantToAddBook && !wantToEditAuthor &&(
+                                        <>
+                                            <div className="book-detail-row">
+                                                <span className="">Name</span>
+                                                <span className="span-stack">{dataFetchedForBookEdit.name}</span>
+                                            </div>
+                                            <div>
+                                                <span className="">Isbn</span>
+                                                <span className="span-stack">{dataFetchedForBookEdit.isbn}</span>
+                                            </div>
+                                            <div>
+                                                <span className="">Author First Name</span>
+                                                <span className="span-stack">{dataFetchedForBookEdit.author.firstName}</span>
+                                            </div>
+                                            <div>
+                                                <span className="">Author Last Name</span> 
+                                                <span className="span-stack">{dataFetchedForBookEdit.author.lastName}</span>
+                                            </div>
+                                        </>
+                                        
+                                    )}
+                                </>
+                            )}
+                            
                         {wantToAddBook && (
                             <AddBook 
                                 closeHandler={()=>setWantToAddBook(false)}
+                                specificCall ={wantToAddAuthor}
                             />
                         )}
                         {wantToEditBook && (
@@ -136,10 +165,15 @@ const authorUpdatedStatus = useSelector(state=>state.app.authorUpdatedStatus)
                                 closeHandler={()=>setWantToEditAuthor(false)}
                             />
                         )}
+                        {wantToAddAuthor && (
+                            <AddBook 
+                                closeHandler={()=>setWantToAddAuthor(false)}
+                                specificCall ={wantToAddAuthor}
+                            />
+                        )}
                             </>
                     </div>
                     </>
-                )}
         </>
         )
 }

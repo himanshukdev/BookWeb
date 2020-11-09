@@ -13,7 +13,7 @@ import "../main.css"
 export default function AddBook(props) {
     const dispatch = useDispatch()
     const DEFAULT_SELECT_VALUE = "NONE";
-    const {closeHandler} = props;
+    const {closeHandler,specificCall} = props;
     const [bookState,setBookState] = useState({
         name:"",
         isbn:"",
@@ -33,11 +33,13 @@ export default function AddBook(props) {
         author:false
       });
     const [error,setError] = useState("");
-    const [wantToAddAuthor,setWantToAddAuthor] = useState(false);
+    const [wantToAddAuthor,setWantToAddAuthor] = useState(specificCall);
     const authorListData = useSelector(state=>state.app.authorListingData);
+    const [authorDropdownData,setAuthorDropdownData] = useState(authorListData);
 
     useEffect(() => {
-    }, []);
+        setAuthorDropdownData(authorListData);
+    }, [authorListData]);
 
     const validateField = (name, value) => {
         let error = "";
@@ -153,7 +155,7 @@ export default function AddBook(props) {
                     <option value={DEFAULT_SELECT_VALUE} disabled>
                             Author
                         </option>
-                        {authorListData.map(author => (
+                        {authorDropdownData.map(author => (
                             <option key={author.firstName} value={author._id}>
                             {`${author.firstName} ${author.lastName}`}
                             </option>

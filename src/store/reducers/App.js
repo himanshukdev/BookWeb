@@ -8,7 +8,12 @@ import {
     SET_BOOK_CREATED_STATUS,
     SET_AUTHOR_CREATED_STATUS,
     SET_AUTHOR_UPDATED_STATUS,
-    SET_BOOK_UPDATED_STATUS
+    SET_BOOK_UPDATED_STATUS,
+    RESET_AUTHOR_CREATED_STATUS,
+    RESET_BOOK_CREATED_STATUS,
+    RESET_BOOK_UPDATED_STATUS,
+    RESET_AUTHOR_UPDATED_STATUS
+
   } from "../../constants/ActionTypes";
 
   import {RESPONSE_STATUS} from "../../constants/AppVariable";
@@ -83,6 +88,26 @@ import {
             ...state,
             bookUpdatedStatus:action.payload
         }
+        case RESET_BOOK_CREATED_STATUS:
+          return {
+              ...state,
+              bookCreatedStatus:action.payload
+          }
+      case RESET_AUTHOR_CREATED_STATUS:
+          return {
+              ...state,
+              authorCreatedStatus:action.payload
+          }
+      case RESET_BOOK_UPDATED_STATUS:
+          return {
+              ...state,
+              bookUpdatedStatus:action.payload
+          }
+      case RESET_AUTHOR_UPDATED_STATUS:
+          return {
+              ...state,
+              authorUpdatedStatus:action.payload
+          }        
       default:
         return state;
     }

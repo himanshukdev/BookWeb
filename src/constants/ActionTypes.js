@@ -11,3 +11,8 @@ export const SET_AUTHOR_CREATED_STATUS = "set_author_ceated_status";
 export const SET_BOOK_CREATED_STATUS =  "set_book_ceated_status";
 export const SET_AUTHOR_UPDATED_STATUS = "set_author_updated_status";
 export const SET_BOOK_UPDATED_STATUS =  "set_book_updated_status";
+
+export const RESET_AUTHOR_CREATED_STATUS = "reset_author_created_status";
+export const RESET_BOOK_CREATED_STATUS = "reset_book_created_status";
+export const RESET_BOOK_UPDATED_STATUS = "reset_book_updated_status";
+export const RESET_AUTHOR_UPDATED_STATUS = "reset_author_updated_status";

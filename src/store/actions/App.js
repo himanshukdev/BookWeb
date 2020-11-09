@@ -10,7 +10,11 @@ import {
     SET_AUTHOR_CREATED_STATUS,
     SET_AUTHOR_LISTING_DATA,
     SET_AUTHOR_UPDATED_STATUS,
-    SET_BOOK_UPDATED_STATUS
+    SET_BOOK_UPDATED_STATUS,
+    RESET_AUTHOR_CREATED_STATUS,
+    RESET_BOOK_CREATED_STATUS,
+    RESET_BOOK_UPDATED_STATUS,
+    RESET_AUTHOR_UPDATED_STATUS
 
   } from "../../constants/ActionTypes";
 
@@ -170,3 +174,23 @@ export const updateBookById = (bookId,formData) => dispatch => {
   };
 
 
+  // Resetting status
+  export const resetBookCreationStatus = () => ({
+    type: RESET_BOOK_CREATED_STATUS,
+    payload: RESPONSE_STATUS.INITSTATE
+  });
+
+  export const resetAuthorCreationStatus = () => ({
+    type: RESET_AUTHOR_CREATED_STATUS,
+    payload: RESPONSE_STATUS.INITSTATE
+  });
+
+  export const resetBookUpdatedStatus = () => ({
+    type: RESET_BOOK_UPDATED_STATUS,
+    payload: RESPONSE_STATUS.INITSTATE
+  });
+
+  export const resetAuthorUpdatedStatus = () => ({
+    type: RESET_AUTHOR_UPDATED_STATUS,
+    payload: RESPONSE_STATUS.INITSTATE
+  });
